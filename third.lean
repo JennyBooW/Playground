@@ -77,7 +77,7 @@ structure Segment where
 deriving Repr
 
 def seg : Segment :=
-  { right := 10, left := 10 }
+  { right := 10, left := 5 }
 
 -- and define a function length : Segment → Float that computes
 -- the length of a line segment. Segment should have at most two fields.
@@ -85,15 +85,17 @@ def seg : Segment :=
 def Length (s : Segment) : Float :=
   Float.abs (s.right - s.left)
 
+#eval Length seg
+
 -- Which names are introduced by the declaration of RectangularPrism?
 -- Which names are introduced by the following declarations of Hamster and Book? What are their types?
 
 structure Hamster where
-  name : String
+  name   : String
   fluffy : Bool
 
 structure Book where
   makeBook ::
-  title : String
+  title  : String
   author : String
-  price : Float
+  price  : Float
