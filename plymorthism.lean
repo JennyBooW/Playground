@@ -204,4 +204,5 @@ def distributes {α β γ : Type} : Prod α (Sum β γ) → Sum (Prod α β) (Pr
 def multiply_by_two {α : Type} : Bool × α → Sum α α
 | (true, a)  => Sum.inl a
 | (false, a) => Sum.inr a
+
 #check multiply_by_two
