@@ -183,10 +183,25 @@ def take {α : Type } (xs : List α) (n : Nat) : List α :=
   match xs, n with
   | [], _  => []
   |  _, 0  => []
-  | _ :: xs', k' => take xs' (k' - 1)
+  | x :: xs', k' => x :: take xs' (k' - 1)
 
 #eval take letters 1
 
--- Using the analogy between types and arithmetic, write a function that distributes products over sums. In other words, it should have type α × (β ⊕ γ) → (α × β) ⊕ (α × γ).
+-- Using the analogy between types and arithmetic, write a function that
+-- distributes products over sums. In other words, it should have
+-- type α × (β ⊕ γ) → (α × β) ⊕ (α × γ).
 
--- Using the analogy between types and arithmetic, write a function that turns multiplication by two into a sum. In other words, it should have type Bool × α → α ⊕ α.
+def distributes {α β γ : Type} : Prod α (Sum β γ) → Sum (Prod α β) (Prod α γ)
+  | (a, Sum.inl b) => Sum.inl (a, b)
+  | (a, Sum.inr c) => Sum.inr (a, c)
+
+#check distributes
+
+-- Using the analogy between types and arithmetic, write a
+-- function that turns multiplication by two into a sum. In other words,
+-- it should have type Bool × α → α ⊕ α.
+
+def multiply_by_two {α : Type} : Bool × α → Sum α α
+| (true, a)  => Sum.inl a
+| (false, a) => Sum.inr a
+#check multiply_by_two
